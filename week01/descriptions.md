@@ -70,7 +70,7 @@ UUID.randomUUID().toString();
       console.log(date.getTime()); // 1730973107863
       ```
 
-<br><br
+<br><br>
 - 결론
 
 - 컬럼 사이즈가 정해져있기도하다. 그래서 int로 해도되고 long으로 해도되고 아니면 uuid로 해도된다. 무한한 데이터를 다룰수 없겠지만 필자의 경우에는 세가지 케이스중에서 **(2)인 uuid로 id를 나타내기로 했다.** 그 이유는 3번의 경우에는 string이 아닌 long으로 표기가 가능하다.
