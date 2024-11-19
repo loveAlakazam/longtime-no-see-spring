@@ -1,5 +1,6 @@
 package spring_study.springmvc.service;
 
+import org.springframework.stereotype.Service;
 import spring_study.springmvc.domain.Member;
 import spring_study.springmvc.repository.MemberRepository;
 import spring_study.springmvc.repository.MemoryMemberRepository;
@@ -7,6 +8,7 @@ import spring_study.springmvc.repository.MemoryMemberRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
     private final MemberRepository memberRepository;
     public MemberService(MemberRepository memberRepository) {
