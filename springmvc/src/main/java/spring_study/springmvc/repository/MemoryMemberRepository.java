@@ -1,6 +1,5 @@
 package spring_study.springmvc.repository;
 
-import org.springframework.stereotype.Repository;
 import spring_study.springmvc.domain.Member;
 
 import java.util.*;
@@ -25,7 +24,7 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Optional< Member > findByName( String name ) {
+    public Optional<Member> findByName(String name ) {
         return store.values().stream().filter( member -> member.getName().equals( name ) ).findAny();
     }
 

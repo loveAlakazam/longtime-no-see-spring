@@ -3,6 +3,7 @@ package spring_study.springmvc.service;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.Commit;
 import spring_study.springmvc.domain.Member;
 import spring_study.springmvc.repository.MemberRepository;
 import spring_study.springmvc.repository.MemoryMemberRepository;
@@ -25,6 +26,7 @@ class MemberServiceTest {
     }
 
     @Test
+//    @Commit // 테스트디비에는 원래는 롤백하지만 해당 어노테이션은 디비에 데이터로우를 남긴다
     void 회원가입( ) {
         // given
         Member member = new Member();
