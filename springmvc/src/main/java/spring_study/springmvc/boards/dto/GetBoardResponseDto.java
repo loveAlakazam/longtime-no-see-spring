@@ -1,26 +1,37 @@
 package spring_study.springmvc.boards.dto;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
-@Getter
-@Setter
+@Data
 @RequiredArgsConstructor
-public class CreateBoardResponseDto {
+public class GetBoardResponseDto {
+
+    @JsonProperty
     private long id;
+
+    @JsonProperty
     private String title;
+
+    @JsonProperty
     private String content;
+
+    @JsonProperty
     private LocalDateTime createDate;
 
     @Deprecated
+    @JsonProperty
     private String authorName;
 
-
     @Builder
-    public CreateBoardResponseDto( long id , String title , String content , LocalDateTime createDate , String authorName ) {
+    public GetBoardResponseDto( long id , String title , String content , LocalDateTime createDate , String authorName ) {
+        this();
         this.id = id;
         this.title = title;
         this.content = content;
