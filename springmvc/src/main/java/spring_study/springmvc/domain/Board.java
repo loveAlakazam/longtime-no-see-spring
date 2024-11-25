@@ -1,10 +1,7 @@
 package spring_study.springmvc.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -14,7 +11,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "board")
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Board {
     // 필드
     @Id
@@ -40,6 +39,7 @@ public class Board {
 
     @Builder
     public Board(String title, String content, String password, String authorName) {
+        this();
         this.title = title;
         this.content = content;
         this.password = password;

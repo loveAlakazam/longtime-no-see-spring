@@ -2,15 +2,14 @@ package spring_study.springmvc.boards;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import spring_study.springmvc.boards.dto.CreateBoardRequestDto;
 import spring_study.springmvc.boards.dto.CreateBoardResponseDto;
 import spring_study.springmvc.boards.dto.GetBoardResponseDto;
+import spring_study.springmvc.domain.Board;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -31,5 +30,12 @@ public class BoardController {
     public List<GetBoardResponseDto> getAllBoards () {
         return boardService.getAll();
     }
+
+    @GetMapping("board/{id}")
+    @ResponseBody
+    public GetBoardResponseDto getBoardById(@PathVariable Long id) {
+        return boardService.getById( id );
+    }
+//    @PatchMapping("boards/:id")
 }
 

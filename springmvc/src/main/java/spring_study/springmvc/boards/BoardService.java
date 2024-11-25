@@ -9,6 +9,7 @@ import spring_study.springmvc.boards.dto.GetBoardResponseDto;
 import spring_study.springmvc.domain.Board;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +39,7 @@ public class BoardService {
                     .authorName( board.getAuthorName() ).build();
 
         } catch ( Exception e ) {
+            System.out.println(e.getMessage());
             throw e;
         }
     }
@@ -62,6 +64,23 @@ public class BoardService {
             System.out.println(e.getMessage());
             throw e;
         }
+    }
+
+    public GetBoardResponseDto getById(long id) {
+        // repository
+        Optional<Board>  boards = boardRepository.findById( id );
+
+        // entity -> dto
+        return boards.map(board -> {
+            GetBoardResponseDto responseDto = new GetBoardResponseDto();
+            responseDto.setId( board.getId() );
+            responseDto.setTitle( board.getTitle() );
+            responseDto.setContent( board.getContent() );
+            responseDto.setCreateDate( board.getCreateDate() );
+            responseDto.setAuthorName( board.getAuthorName() );
+            return responseDto;
+        }).orElse(null);
+
     }
 
 

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 @Transactional
 public interface BoardRepositoryImpl extends JpaRepository<Board, Long>, BoardRepository {
     @Override
