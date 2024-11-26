@@ -3,13 +3,10 @@ package spring_study.springmvc.boards;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import spring_study.springmvc.boards.dto.CreateBoardRequestDto;
-import spring_study.springmvc.boards.dto.CreateBoardResponseDto;
-import spring_study.springmvc.boards.dto.GetBoardResponseDto;
-import spring_study.springmvc.domain.Board;
+import spring_study.springmvc.boards.dto.*;
+import spring_study.springmvc.boards.errors.PasswordMismatchException;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -20,8 +17,8 @@ public class BoardController {
 
     @PostMapping("board")
     @ResponseBody
-    public CreateBoardResponseDto create ( @RequestBody()CreateBoardRequestDto requestDto ) {
-        return  boardService.create( requestDto );
+    public CreateBoardResponseDto create ( @RequestBody()CreateBoardRequestDto request ) {
+        return  boardService.create( request );
     }
 
 
@@ -33,9 +30,18 @@ public class BoardController {
 
     @GetMapping("board/{id}")
     @ResponseBody
-    public GetBoardResponseDto getBoardById(@PathVariable Long id) {
+    public GetBoardResponseDto getBoardById( @PathVariable long id )  {
         return boardService.getById( id );
     }
-//    @PatchMapping("boards/:id")
+    @PatchMapping("boards/{id}")
+    @ResponseBody
+    public UpdateBoardResponseDto updateBoard( @PathVariable long id, @RequestBody PasswordMatchRequestDto request ) throws PasswordMismatchException {
+        boolean matchedPassword = this.boardService.isRightPassword( id , request.getPassword() );
+        if ( !matchedPassword ) {
+            // 비밀번호 불일치하면 400번 예외처리.
+            throw new PasswordMismatchException();
+        }
+        return this.boardService.updateBoard(id, )
+    }
 }
 

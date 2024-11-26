@@ -13,6 +13,7 @@ public class CreateBoardRequestDto {
     // 생성자
     @Builder
     public CreateBoardRequestDto(String title, String content, String password, String authorName) {
+        this();
         this.title = title;
         this.content = content;
         this.password = password;

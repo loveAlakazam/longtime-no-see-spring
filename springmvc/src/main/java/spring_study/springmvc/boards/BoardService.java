@@ -68,10 +68,10 @@ public class BoardService {
 
     public GetBoardResponseDto getById(long id) {
         // repository
-        Optional<Board>  boards = boardRepository.findById( id );
+        Optional<Board>  result = boardRepository.findById( id );
 
         // entity -> dto
-        return boards.map(board -> {
+        return result.map(board -> {
             GetBoardResponseDto responseDto = new GetBoardResponseDto();
             responseDto.setId( board.getId() );
             responseDto.setTitle( board.getTitle() );
@@ -81,6 +81,12 @@ public class BoardService {
             return responseDto;
         }).orElse(null);
 
+    }
+
+    public boolean isRightPassword (long id, String inputPassword) {
+        // repository
+        String realBoardPassword = String.valueOf( boardRepository.findById( id ).map( Board::getPassword ) );
+        return realBoardPassword.equals( inputPassword );
     }
 
 

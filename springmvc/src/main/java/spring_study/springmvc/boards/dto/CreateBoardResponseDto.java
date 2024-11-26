@@ -21,6 +21,7 @@ public class CreateBoardResponseDto {
 
     @Builder
     public CreateBoardResponseDto( long id , String title , String content , LocalDateTime createDate , String authorName ) {
+        this();
         this.id = id;
         this.title = title;
         this.content = content;
