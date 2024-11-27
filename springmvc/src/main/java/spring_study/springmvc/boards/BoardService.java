@@ -71,16 +71,9 @@ public class BoardService {
         Optional<Board>  result = boardRepository.findById( id );
 
         // entity -> dto
-        return result.map(board -> {
-            GetBoardResponseDto responseDto = new GetBoardResponseDto();
-            responseDto.setId( board.getId() );
-            responseDto.setTitle( board.getTitle() );
-            responseDto.setContent( board.getContent() );
-            responseDto.setCreateDate( board.getCreateDate() );
-            responseDto.setAuthorName( board.getAuthorName() );
-            return responseDto;
-        }).orElse(null);
-
+        return result.map(
+            board -> GetBoardResponseDto.builder().id( board.getId() ).title( board.getTitle() ).content( board.getContent() ).createDate( board.getCreateDate() ).authorName( board.getAuthorName() ).build()
+        ).orElse( null );
     }
 
     public boolean isRightPassword (long id, String inputPassword) {

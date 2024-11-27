@@ -6,12 +6,26 @@ import lombok.Getter;
 @Getter
 public class UpdateBoardRequestDto  extends PasswordMatchRequestDto {
     // 필드
-    private String title;
-    private String
+    // inputPassword; // 입력 비밀번호
+    private String title; // 제목
+    private String content; // 내용
+    private String password; // (변경예정) 비밀번호
+
+    @Deprecated
+    private String authorName; // 작성자명
+
 
     // 생성자
+    public UpdateBoardRequestDto(long id , String inputPassword ) {
+        super( id , inputPassword );
+    }
+
     @Builder
-    public UpdateBoardRequestDto( long id , String password , String title, String content, String authorName, String ) {
-        super( id , password );
+    public UpdateBoardRequestDto( long id , String inputPassword, String title, String content, String password, String authorName) {
+        this(id, inputPassword);
+        this.title = title;
+        this.content = content;
+        this.password = password;
+        this.authorName = authorName;
     }
 }

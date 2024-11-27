@@ -2,15 +2,16 @@ package spring_study.springmvc.boards.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
-// 게시글 수정, 삭제 에 활용.
+@Getter
 public abstract class PasswordMatchRequestDto {
     private long id; // 게시글 아이디
-    private String password; //
+    private String inputPassword; // 입력 패스워드
 
-    public PasswordMatchRequestDto( long id , String password ) {
+    public PasswordMatchRequestDto( long id , String inputPassword ) {
         this.id = id;
-        this.password = password;
+        this.inputPassword = inputPassword;
     }
 }
 

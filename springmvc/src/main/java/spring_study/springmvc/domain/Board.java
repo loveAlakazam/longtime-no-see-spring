@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Board {
+public class Board  extends BaseEntity{
     // 필드
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +28,6 @@ public class Board {
 
     @Column(nullable = false)
     private String password; // 비밀번호
-
-    @CreatedDate
-    @Column(updatable = false)
-    @Temporal( TemporalType.TIMESTAMP )
-    private LocalDateTime createDate; // 작성날짜
 
     @Column(nullable = false)
     private String authorName; // 작성자명
