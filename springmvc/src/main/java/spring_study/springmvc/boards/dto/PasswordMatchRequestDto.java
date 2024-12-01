@@ -6,11 +6,9 @@ import lombok.Getter;
 
 @Getter
 public abstract class PasswordMatchRequestDto {
-    private long id; // 게시글 아이디
     private String inputPassword; // 입력 패스워드
 
-    public PasswordMatchRequestDto( long id , String inputPassword ) {
-        this.id = id;
+    public PasswordMatchRequestDto(  String inputPassword ) {
         this.inputPassword = inputPassword;
     }
 }

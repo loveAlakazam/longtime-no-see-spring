@@ -14,4 +14,10 @@ public class GlobalExceptionHandler {
     public ErrorResponse handlePasswordMismatchException ( PasswordMismatchException exception) {
         return new ErrorResponse("PASSWORD_MISMATCH", exception.getMessage());
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleNotFoundException (NotFoundException exception) {
+        return new ErrorResponse("NOT_FOUND", exception.getMessage());
+    }
 }

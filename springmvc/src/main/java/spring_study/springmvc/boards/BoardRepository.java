@@ -21,4 +21,6 @@ public interface BoardRepository {
     // 게시글 수정
     // 게시글 삭제
 
+    void deleteAll(); // 게시글 전체 삭제
+
 }

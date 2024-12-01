@@ -1,25 +1,35 @@
 package spring_study.springmvc.boards.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 
 @Data
-@RequiredArgsConstructor
+@Getter
+@Setter
 public class UpdateBoardResponseDto {
+    @JsonProperty
+    private long id;
+
+    @JsonProperty
     private String title;
+
+    @JsonProperty
     private String content;
-    private String password;
+
+    @Deprecated
+    @JsonProperty
     private String authorName;
 
     // 생성자
+    public UpdateBoardResponseDto(){}
     @Builder
-    public UpdateBoardResponseDto(String title, String content, String password, String authorName) {
+    public UpdateBoardResponseDto(long id, String title, String content, String authorName) {
         this();
+        this.id = id;
         this.title = title;
         this.content = content;
-        this.password = password;
+
         this.authorName = authorName;
     }
 }

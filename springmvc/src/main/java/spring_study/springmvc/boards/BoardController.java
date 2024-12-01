@@ -33,16 +33,23 @@ public class BoardController {
     public GetBoardResponseDto getBoardById( @PathVariable long id )  {
         return boardService.getById( id );
     }
-    @PatchMapping("boards/{id}")
+    @PatchMapping("board/{id}")
     @ResponseBody
-    public UpdateBoardResponseDto updateBoard( @PathVariable long id, @RequestBody UpdateBoardRequestDto request ) throws PasswordMismatchException {
-        String inputPassword = request.getInputPassword();
-        boolean matchedPassword = this.boardService.isRightPassword( id , inputPassword );
-        if ( !matchedPassword ) {
-            // 비밀번호 불일치하면 400번 예외처리.
-            throw new PasswordMismatchException();
+    public UpdateBoardResponseDto updateBoard( @PathVariable long id, @RequestBody() UpdateBoardRequestDto request ) throws Exception {
+        try {
+            String inputPassword = request.getInputPassword();
+            boolean matchedPassword = this.boardService.isRightPassword( id , inputPassword );
+            if ( !matchedPassword ) {
+                // 비밀번호 불일치하면 400번 예외처리.
+                throw new PasswordMismatchException();
+            }
+
+            return this.boardService.updateBoard( id , request );
+        } catch (Exception e) {
+            throw e;
         }
-        return new UpdateBoardResponseDto();
     }
+
+//    @DeleteMapping()
 }
 

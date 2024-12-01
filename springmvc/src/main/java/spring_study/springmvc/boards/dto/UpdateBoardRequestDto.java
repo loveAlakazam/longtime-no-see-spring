@@ -16,13 +16,13 @@ public class UpdateBoardRequestDto  extends PasswordMatchRequestDto {
 
 
     // 생성자
-    public UpdateBoardRequestDto(long id , String inputPassword ) {
-        super( id , inputPassword );
+    public UpdateBoardRequestDto(String inputPassword ) {
+        super( inputPassword );
     }
 
     @Builder
-    public UpdateBoardRequestDto( long id , String inputPassword, String title, String content, String password, String authorName) {
-        this(id, inputPassword);
+    public UpdateBoardRequestDto( String inputPassword, String title, String content, String password, String authorName) {
+        this(inputPassword);
         this.title = title;
         this.content = content;
         this.password = password;
