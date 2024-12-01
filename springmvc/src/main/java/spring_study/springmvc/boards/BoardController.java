@@ -44,6 +44,10 @@ public class BoardController {
     @ResponseBody
     public UpdateBoardResponseDto updateBoard( @PathVariable long id, @RequestBody() UpdateBoardRequestDto request ) throws Exception {
         try {
+            // id에 부합한 게시글이 존재하는지 확인
+            GetBoardResponseDto board = this.boardService.getById( id );
+
+            // 입력비밀번호와 실제비밀번호 일치여부 확인
             String inputPassword = request.getInputPassword();
             boolean matchedPassword = this.boardService.isRightPassword( id , inputPassword );
             if ( !matchedPassword ) {
@@ -51,12 +55,34 @@ public class BoardController {
                 throw new PasswordMismatchException();
             }
 
+            // 게시글 수정
             return this.boardService.updateBoard( id , request );
         } catch (Exception e) {
             throw e;
         }
     }
 
-//    @DeleteMapping()
+    @DeleteMapping("board/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBoard(@PathVariable long id, @RequestBody() DeleteBoardRequestDto request ) throws PasswordMismatchException, NotFoundException {
+        try {
+            // id에 부합한 게시글이 존재하는지 확인
+            GetBoardResponseDto board = this.boardService.getById( id );
+
+            // 입력비밀번호와 실제비밀번호 일치여부 확인
+            String inputPassword = request.getInputPassword();
+            boolean matchedPassword = this.boardService.isRightPassword( id , inputPassword );
+            if ( !matchedPassword ) {
+                // 비밀번호 불일치하면 400번 예외처리.
+                throw new PasswordMismatchException();
+            }
+
+            // 게시글 삭제
+            this.boardService.deleteById(id);
+        } catch(Exception e) {
+            throw e;
+        }
+
+    }
 }
 

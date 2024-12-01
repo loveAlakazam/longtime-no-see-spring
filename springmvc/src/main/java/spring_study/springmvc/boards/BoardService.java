@@ -131,4 +131,7 @@ public class BoardService {
         }
     }
 
+    public void deleteById( long id ) {
+        boardRepository.deleteById( id );
+    }
 }
