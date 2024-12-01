@@ -2,6 +2,7 @@ package spring_study.springmvc.boards;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring_study.springmvc.boards.dto.*;
 import spring_study.springmvc.boards.errors.PasswordMismatchException;
@@ -66,14 +67,20 @@ public class BoardService {
         }
     }
 
-    public GetBoardResponseDto getById(long id) {
+    public GetBoardResponseDto getById(long id) throws NotFoundException {
         // repository
         Optional<Board>  result = boardRepository.findById( id );
 
+
         // entity -> dto
         return result.map(
-            board -> GetBoardResponseDto.builder().id( board.getId() ).title( board.getTitle() ).content( board.getContent() ).createDate( board.getCreateDate() ).authorName( board.getAuthorName() ).build()
-        ).orElse( null );
+            board -> GetBoardResponseDto.builder()
+                    .id( board.getId() )
+                    .title( board.getTitle() )
+                    .content( board.getContent() )
+                    .createDate( board.getCreateDate() ).
+                    authorName( board.getAuthorName() )
+                    .build() ).orElseThrow( () ->  new NotFoundException( "게시글이 존재하지 않습니다." ) );
     }
 
     public boolean isRightPassword (long id, String inputPassword) throws PasswordMismatchException {
@@ -115,7 +122,7 @@ public class BoardService {
                     .id( board.getId() )
                     .title( board.getTitle() )
                     .content( board.getContent() )
-                    .authorName( board.getAuthorName() ).build();
+                    .authorName( board.getAuthorName()).build();
         } catch( Exception e) {
             if(e instanceof NotFoundException) {
                 throw e;

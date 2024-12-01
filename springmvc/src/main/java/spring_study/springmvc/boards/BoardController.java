@@ -1,10 +1,12 @@
 package spring_study.springmvc.boards;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import spring_study.springmvc.boards.dto.*;
 import spring_study.springmvc.boards.errors.PasswordMismatchException;
+import spring_study.springmvc.commons.NotFoundException;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class BoardController {
 
     @PostMapping("board")
     @ResponseBody
+    @ResponseStatus( HttpStatus.CREATED)
     public CreateBoardResponseDto create ( @RequestBody()CreateBoardRequestDto request ) {
         return  boardService.create( request );
     }
@@ -30,8 +33,12 @@ public class BoardController {
 
     @GetMapping("board/{id}")
     @ResponseBody
-    public GetBoardResponseDto getBoardById( @PathVariable long id )  {
-        return boardService.getById( id );
+    public GetBoardResponseDto getBoardById( @PathVariable long id ) throws NotFoundException {
+        try{
+            return boardService.getById( id );
+        } catch(Exception e) {
+            throw e;
+        }
     }
     @PatchMapping("board/{id}")
     @ResponseBody
